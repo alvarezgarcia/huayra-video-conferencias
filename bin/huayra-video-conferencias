@@ -27,8 +27,8 @@ class Browser(QWebView):
         self.setWindowTitle('Loading...')
         self.titleChanged.connect(self.adjustTitle)
         self.linkClicked.connect(self.goToLink)
-	self.setFixedWidth(400)
-	self.setFixedHeight(200)
+	self.setFixedWidth(500)
+	self.setFixedHeight(300)
         #super(Browser).connect(self.ui.webView,QtCore.SIGNAL("linkClicked (const QUrl&)"), self.linkClicked)
 
     def goToLink(self, url):

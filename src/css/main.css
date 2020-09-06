@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+
+main {
+  @apply h-screen bg-green-500 flex flex-col items-center;
+}
+
+.title {
+  @apply text-2xl mt-2;
+}
+
+.input-container {
+  @apply flex items-center mt-4;
+  height: 2rem;
+}
+
+input {
+  @apply rounded h-full;
+}
+
+button {
+  @apply rounded h-full ml-2 px-4 bg-red-500;
+}
+
+@tailwind utilities;

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/main.css">
+    <script>
+
+      var baseURL = 'https://meet.jit.si/';
+
+      function init() {
+        var roomNameInput = document.getElementById('room-name');
+        var goToButton = document.getElementById('go');
+        var linkPlaceholder = document.getElementById('link-placeholder');
+        var errorMessage = document.getElementById('error-message');
+
+        roomNameInput.addEventListener('keypress', function(ev) {
+          var ew = ev.charCode;
+
+          if(48 <= ew && ew <= 57) return;
+          if(65 <= ew && ew <= 90) return;
+          if(97 <= ew && ew <= 122) return;
+
+          ev.preventDefault();
+        });
+
+        goToButton.addEventListener('click', function() {
+          var roomName = roomNameInput.value;
+          if (!roomName) {
+            errorMessage.classList.remove('hidden');
+            errorMessage.classList.add('block');
+            return;
+          }
+
+          errorMessage.classList.remove('block');
+          errorMessage.classList.add('hidden');
+
+          var url = baseURL + roomName;
+
+          linkPlaceholder.href = url;
+          linkPlaceholder.click();
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', init);
+    </script>
+  </head>
+	<body>
+    <main>
+      <h1 class="title">Huayra Videoconferencia</h1>
+      <p class="mt-10">Quiero crear una videoconferencia que se llame:</p>
+      <div class="input-container">
+        <input id="room-name" type="text" />
+        <button id="go">¡Ir!</button>
+      </div>
+      <a href="#" class="hidden" id="link-placeholder"></a>
+      <p class="hidden mt-4" id="error-message">Por favor ingresá un nombre</p>
+    </main>
+	</body>
+</html>

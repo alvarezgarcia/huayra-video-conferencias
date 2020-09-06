@@ -3,28 +3,17 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/main.css">
+    <title>Huayra Videoconferencia</title>
     <script>
-
       var baseURL = 'https://meet.jit.si/';
 
       function init() {
         var roomNameInput = document.getElementById('room-name');
         var goToButton = document.getElementById('go');
-        var linkPlaceholder = document.getElementById('link-placeholder');
         var errorMessage = document.getElementById('error-message');
+        var linkPlaceholder = document.getElementById('link-placeholder');
 
-        roomNameInput.addEventListener('keypress', function(ev) {
-          var ew = ev.charCode;
-
-          if(48 <= ew && ew <= 57) return;
-          if(65 <= ew && ew <= 90) return;
-          if(97 <= ew && ew <= 122) return;
-
-          ev.preventDefault();
-        });
-
-        goToButton.addEventListener('click', function() {
-          var roomName = roomNameInput.value;
+        function onSubmit(roomName) {
           if (!roomName) {
             errorMessage.classList.remove('hidden');
             errorMessage.classList.add('block');
@@ -38,6 +27,22 @@
 
           linkPlaceholder.href = url;
           linkPlaceholder.click();
+        }
+
+        roomNameInput.addEventListener('keypress', function(ev) {
+          var ew = ev.charCode;
+
+          if (ew === 13) return onSubmit(roomNameInput.value);
+
+          if(48 <= ew && ew <= 57) return;
+          if(65 <= ew && ew <= 90) return;
+          if(97 <= ew && ew <= 122) return;
+
+          ev.preventDefault();
+        });
+
+        goToButton.addEventListener('click', function() {
+          onSubmit(roomNameInput.value);
         });
       }
 
